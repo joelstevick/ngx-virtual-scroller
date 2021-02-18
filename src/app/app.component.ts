@@ -1,5 +1,5 @@
-import { Component, OnInit, VERSION } from "@angular/core";
-import { IPageInfo } from "ngx-virtual-scroller";
+import { Component, OnInit, VERSION, ViewChild } from "@angular/core";
+import { IPageInfo, VirtualScrollerComponent } from "ngx-virtual-scroller";
 
 const PageSize = 10;
 
@@ -9,6 +9,9 @@ const PageSize = 10;
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
+  @ViewChild(VirtualScrollerComponent)
+  private virtualScroller: VirtualScrollerComponent;
+
   items: any[] = [];
   count = 0;
 

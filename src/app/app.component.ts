@@ -1,4 +1,5 @@
 import { Component, OnInit, VERSION, ViewChild } from "@angular/core";
+import { DomSanitizer } from "@angular/platform-browser";
 import { IPageInfo, VirtualScrollerComponent } from "ngx-virtual-scroller";
 
 const PageSize = 10;
@@ -11,6 +12,7 @@ const MaxItems = 40;
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
+  constructor(private sanitizer: DomSanitizer) {}
   @ViewChild(VirtualScrollerComponent)
   private virtualScroller: VirtualScrollerComponent;
 
@@ -24,7 +26,10 @@ export class AppComponent implements OnInit {
     const newItems: any[] = [];
     for (let i = 0; i < PageSize; i++) {
       newItems.push({
-        html: `${-1 * (this.items.length + i + 1)}`
+        html: this.sanitizer.bypassSecurityTrustHtml(
+          `<div style="height: ${this.getHeight()}px">${-1 *
+            (this.items.length + i + 1)}</div>`
+        )
       });
     }
     newItems.reverse();
@@ -53,6 +58,6 @@ export class AppComponent implements OnInit {
   }
 
   getHeight() {
-    return Math.round(Math.random() * 100) + 30;
+    return Math.round(Math.random() * 50) + 20;
   }
 }

@@ -1,4 +1,4 @@
-<hello name="{{ name }}"></hello>
-<p>
-  Start editing to see some magic happen :)
-</p>
+<virtual-scroller #scroll [items]="items">
+	<div *ngFor="let item of scroll.viewPortItems">
+	</div>
+</virtual-scroller>

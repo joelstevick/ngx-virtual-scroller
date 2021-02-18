@@ -7,5 +7,4 @@ virtual-scroller {
   display: block;
   width: 100%;
   text-align: center;
-  border-bottom: 1px dashed red;
 }

@@ -11,4 +11,12 @@ export class AppComponent {
       html: "this is a test"
     }
   ];
+
+  vsStart(info) {
+    console.log(info);
+  }
+
+  vsEnd(info) {
+    console.log(info);
+  }
 }

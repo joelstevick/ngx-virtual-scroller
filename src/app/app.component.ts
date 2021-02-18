@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   items: any[] = [];
   count = 0;
   needMore = true;
+  timeout: any;
 
   ngOnInit(): void {}
 
@@ -29,8 +30,8 @@ export class AppComponent implements OnInit {
     for (let i = 0; i < pageSize; i++) {
       newItems.push({
         html: this.sanitizer.bypassSecurityTrustHtml(
-          `<div style="height: ${this.getHeight()}px">${-1 *
-            (this.items.length + i)}</div>`
+          `<div style="height: ${this.getHeight()}px">${this.items.length +
+            i}</div>`
         )
       });
     }
@@ -48,13 +49,17 @@ export class AppComponent implements OnInit {
 
       const scrollToEnd = this.items.length === 0;
 
-      console.log("fetching more..");
+      console.log("FETCHING MORE..");
       this.fetchMore();
 
       if (scrollToEnd) {
         this.virtualScroller.scrollToIndex(this.items.length - 1);
       } else {
-        setTimeout(() => {
+        // scroll to index 1, but need left the event loop run, first
+        if (this.timeout) {
+          clearTimeout(this.timeout);
+        }
+        this.timeout = setTimeout(() => {
           console.log("scroll => 1");
           this.virtualScroller.scrollToIndex(1);
         });

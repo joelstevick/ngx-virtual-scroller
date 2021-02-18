@@ -1,6 +1,7 @@
 <h2>Virtual Scroll Demo using ngx-virtual-scroller</h2>
 
 <virtual-scroller #scroll [items]="items" [enableUnequalChildrenSizes]="true" (vsStart)="vsStart($event)">
-	<div *ngFor="let item of scroll.viewPortItems" class="item" [innerHTML]="item.html">
+	<div *ngFor="let item of scroll.viewPortItems; index as index" class="item" [innerHTML]="item.html"
+		[style.height]="getHeight() + 'px'">
 	</div>
 </virtual-scroller>

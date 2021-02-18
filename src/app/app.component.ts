@@ -45,4 +45,8 @@ export class AppComponent implements OnInit {
       this.needMore = true;
     }
   }
+
+  getHeight() {
+    return (Math.round(Math.random() * 100) + 30)
+  }
 }

@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
   }
   vsStart(pageInfo: IPageInfo) {
     if (pageInfo.startIndex === 0) {
-      console.log("vsStart", pageInfo.startIndex);
+      console.log("vsStart", pageInfo);
     }
   }
 }

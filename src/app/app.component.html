@@ -1,6 +1,6 @@
 <h2>Virtual Scroll Demo using ngx-virtual-scroller</h2>
 
-<virtual-scroller #scroll [items]="items" (vsStart)="vsStart($event)" (vsEnd)="vsEnd($event)">
+<virtual-scroller #scroll [items]="items" (vsStart)="vsStart($event)">
 	<div *ngFor="let item of scroll.viewPortItems" class="item" [innerHTML]="item.html">
 	</div>
 </virtual-scroller>

@@ -1,4 +1,5 @@
 import { Component, OnInit, VERSION } from "@angular/core";
+import { IPageInfo } from "ngx-virtual-scroller";
 
 const PageSize = 10;
 
@@ -25,11 +26,7 @@ export class AppComponent implements OnInit {
     this.items = [...newItems, ...this.items];
     this.items.reverse();
   }
-  vsStart(info) {
-    console.log(info);
-  }
-
-  vsEnd(info) {
-    console.log(info);
+  vsStart(pageInfo: IPageInfo) {
+    console.log(pageInfo);
   }
 }

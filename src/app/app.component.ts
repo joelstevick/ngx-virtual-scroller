@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
         this.timeout = setTimeout(() => {
           console.log("scroll => 1");
           this.virtualScroller.scrollToIndex(1);
-        });
+        }, 100);
       }
     } else if (pageInfo.startIndex > 0) {
       this.needMore = true;

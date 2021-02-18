@@ -15,7 +15,7 @@ export function vsDefaultOptionsFactory(): VirtualScrollerDefaultOptions {
     resizeBypassRefreshThreshold: 5,
     scrollAnimationTime: 0,
     scrollDebounceTime: 100,
-    scrollThrottlingTime: 0,
+    scrollThrottlingTime: 500,
     stripedTable: false
   };
 }

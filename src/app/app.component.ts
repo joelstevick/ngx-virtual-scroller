@@ -2,7 +2,7 @@ import { Component, OnInit, VERSION, ViewChild } from "@angular/core";
 import { DomSanitizer } from "@angular/platform-browser";
 import { IPageInfo, VirtualScrollerComponent } from "ngx-virtual-scroller";
 
-const PageSize = 10;
+const PageSize = 1;
 
 const MaxItems = Infinity;
 
@@ -24,7 +24,9 @@ export class AppComponent implements OnInit {
 
   fetchMore() {
     const newItems: any[] = [];
-    for (let i = 0; i < PageSize; i++) {
+    const pageSize = this.items.length > 0 ? PageSize : 10;
+
+    for (let i = 0; i < pageSize; i++) {
       newItems.push({
         html: this.sanitizer.bypassSecurityTrustHtml(
           `<div style="height: ${this.getHeight()}px">${-1 *
@@ -51,7 +53,7 @@ export class AppComponent implements OnInit {
       if (scrollToEnd) {
         this.virtualScroller.scrollToIndex(this.items.length - 1);
       } else {
-        this.virtualScroller.scrollToPosition(pageInfo.scrollEndPosition);
+        this.virtualScroller.scrollToIndex(1);
       }
     } else if (pageInfo.startIndex > 0) {
       this.needMore = true;

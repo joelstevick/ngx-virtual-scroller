@@ -4,7 +4,7 @@ import { IPageInfo, VirtualScrollerComponent } from "ngx-virtual-scroller";
 
 const PageSize = 5;
 
-const MaxItems = 40;
+const MaxItems = Infinity;
 
 @Component({
   selector: "my-app",
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
       newItems.push({
         html: this.sanitizer.bypassSecurityTrustHtml(
           `<div style="height: ${this.getHeight()}px">${-1 *
-            (this.items.length + i + 1)}</div>`
+            (this.items.length + i)}</div>`
         )
       });
     }
@@ -56,10 +56,12 @@ export class AppComponent implements OnInit {
       }
     } else if (pageInfo.startIndex > 0) {
       this.needMore = true;
+      console.log("need more");
     }
   }
 
   getHeight() {
+    return 30;
     return Math.round(Math.random() * 50) + 20;
   }
 }

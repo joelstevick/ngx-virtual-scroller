@@ -1,3 +1,5 @@
-p {
-  font-family: Lato;
+virtual-scroller {
+  height: 200px;
+  overflow-y: auto;
+  border: 1px solid #666;
 }

@@ -38,15 +38,21 @@ export class AppComponent implements OnInit {
     ) {
       this.needMore = false;
 
+      const scrollToEnd = this.items.length === 0;
+
       this.fetchMore();
 
-      this.virtualScroller.scrollToIndex(1);
+      if (scrollToEnd) {
+        this.virtualScroller.scrollToIndex(this.items.length - 1);
+      } else {
+        this.virtualScroller.scrollToIndex(1);
+      }
     } else if (pageInfo.startIndex > 0) {
       this.needMore = true;
     }
   }
 
   getHeight() {
-    return (Math.round(Math.random() * 100) + 30)
+    return Math.round(Math.random() * 100) + 30;
   }
 }

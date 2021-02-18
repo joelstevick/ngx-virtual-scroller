@@ -29,7 +29,6 @@ export class AppComponent implements OnInit {
     this.items = [...newItems, ...this.items];
   }
   vsStart(pageInfo: IPageInfo) {
-    console.log("vsStart", pageInfo);
     if (this.needMore && pageInfo.startIndex <= 0) {
       this.needMore = false;
 

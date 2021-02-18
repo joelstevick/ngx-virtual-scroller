@@ -9,5 +9,5 @@ virtual-scroller {
   height: 30px;
   line-height: 30px;
   text-align: center;
-  border-bottom: 1px dashed green;
+  border-bottom: 1px dashed red;
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, VERSION, ViewChild } from "@angular/core";
 import { DomSanitizer } from "@angular/platform-browser";
 import { IPageInfo, VirtualScrollerComponent } from "ngx-virtual-scroller";
 
-const PageSize = 5;
+const PageSize = 1;
 
 const MaxItems = Infinity;
 

@@ -14,10 +14,9 @@ export class AppComponent implements OnInit {
 
   items: any[] = [];
   count = 0;
+  needMore = true;
 
-  ngOnInit(): void {
-    this.fetchMore();
-  }
+  ngOnInit(): void {}
 
   fetchMore() {
     const newItems: any[] = [];
@@ -31,7 +30,10 @@ export class AppComponent implements OnInit {
   }
   vsStart(pageInfo: IPageInfo) {
     console.log("vsStart", pageInfo);
-    if (pageInfo.startIndex === 0) {
+    if (this.needMore && pageInfo.startIndex <= 0) {
+      this.needMore = false;
+
+      this.fetchMore;
     }
   }
 }

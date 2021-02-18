@@ -6,5 +6,9 @@ import { Component, VERSION } from "@angular/core";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  items: any[] = [];
+  items: any[] = [
+    {
+      html: "this is a test"
+    }
+  ];
 }

@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
 
       this.fetchMore();
     } else if (pageInfo.startIndex > 0) {
+      this.needMore = true;
     }
   }
 }

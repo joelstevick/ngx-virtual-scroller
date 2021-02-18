@@ -53,6 +53,8 @@ export class AppComponent implements OnInit {
       this.fetchMore();
 
       if (scrollToEnd) {
+        this.needMore = true;
+
         this.virtualScroller.scrollToIndex(this.items.length - 1);
       } else {
         // scroll to index 1, but need left the event loop run, first
@@ -61,17 +63,13 @@ export class AppComponent implements OnInit {
         }
         this.timeout = setTimeout(() => {
           console.log("scroll => 1");
-          this.virtualScroller.scrollToIndex(1);
+          this.needMore = true;
         }, 100);
       }
-    } else if (pageInfo.startIndex > 0) {
-      this.needMore = true;
-      console.log("need more");
     }
   }
 
   getHeight() {
-    return 30;
     return Math.round(Math.random() * 50) + 20;
   }
 }

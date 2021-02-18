@@ -25,8 +25,8 @@ export class AppComponent implements OnInit {
         html: `${-1 * (this.items.length + i)}`
       });
     }
+    newItems.reverse();
     this.items = [...newItems, ...this.items];
-    this.items.reverse();
   }
   vsStart(pageInfo: IPageInfo) {
     console.log("vsStart", pageInfo);

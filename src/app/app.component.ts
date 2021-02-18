@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     const newItems: any[] = [];
     for (let i = 0; i < PageSize; i++) {
       newItems.push({
-        html: `${-1 * (this.items.length + i)}`
+        html: `${-1 * (this.items.length + i + 1)}`
       });
     }
     newItems.reverse();

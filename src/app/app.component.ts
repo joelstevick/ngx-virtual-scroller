@@ -34,6 +34,8 @@ export class AppComponent implements OnInit {
       this.needMore = false;
 
       this.fetchMore();
+
+      this.virtualScroller.scrollToIndex(1);
     } else if (pageInfo.startIndex > 0) {
       this.needMore = true;
     }

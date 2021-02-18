@@ -3,6 +3,8 @@ import { IPageInfo, VirtualScrollerComponent } from "ngx-virtual-scroller";
 
 const PageSize = 10;
 
+const MaxItems = 40;
+
 @Component({
   selector: "my-app",
   templateUrl: "./app.component.html",
@@ -29,7 +31,11 @@ export class AppComponent implements OnInit {
     this.items = [...newItems, ...this.items];
   }
   vsStart(pageInfo: IPageInfo) {
-    if (this.needMore && pageInfo.startIndex <= 0) {
+    if (
+      this.needMore &&
+      pageInfo.startIndex <= 0 &&
+      this.items.length < MaxItems
+    ) {
       this.needMore = false;
 
       this.fetchMore();

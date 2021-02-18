@@ -13,7 +13,7 @@ export function vsDefaultOptionsFactory(): VirtualScrollerDefaultOptions {
     checkResizeInterval: 1000,
     modifyOverflowStyleOfParentScroll: true,
     resizeBypassRefreshThreshold: 5,
-    scrollAnimationTime: 750,
+    scrollAnimationTime: 0,
     scrollDebounceTime: 100,
     scrollThrottlingTime: 0,
     stripedTable: false

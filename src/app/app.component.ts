@@ -4,7 +4,7 @@ import { IPageInfo, VirtualScrollerComponent } from "ngx-virtual-scroller";
 
 const PageSize = 10;
 
-const MaxItems = 40;
+const MaxItems = Infinity;
 
 @Component({
   selector: "my-app",
@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
     this.items = [...newItems, ...this.items];
   }
   vsStart(pageInfo: IPageInfo) {
+    console.log("vsStart", pageInfo);
     if (
       this.needMore &&
       pageInfo.startIndex <= 0 &&
@@ -49,6 +50,8 @@ export class AppComponent implements OnInit {
 
       if (scrollToEnd) {
         this.virtualScroller.scrollToIndex(this.items.length - 1);
+      } else {
+        this.virtualScroller.scrollToPosition(pageInfo.scrollEndPosition);
       }
     } else if (pageInfo.startIndex > 0) {
       this.needMore = true;

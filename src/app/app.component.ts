@@ -30,8 +30,8 @@ export class AppComponent implements OnInit {
     this.items.reverse();
   }
   vsStart(pageInfo: IPageInfo) {
+    console.log("vsStart", pageInfo);
     if (pageInfo.startIndex === 0) {
-      console.log("vsStart", pageInfo);
     }
   }
 }

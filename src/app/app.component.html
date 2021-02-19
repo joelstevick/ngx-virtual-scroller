@@ -1,7 +1,7 @@
 <h2>Virtual Scroll Demo using ngx-virtual-scroller</h2>
 
 <virtual-scroller #scroll [items]="items" [enableUnequalChildrenSizes]="false" (vsStart)="vsStart($event)">
-	<div id="beacon" [style.visibility]="scroll.viewPortItems?.length > 0 ? 'visible':'hidden'">loading...</div>
+	<div id="beacon">loading...</div>
 	<div *ngFor="let item of scroll.viewPortItems; index as index" class="item" [innerHTML]="item.html">
 	</div>
 </virtual-scroller>

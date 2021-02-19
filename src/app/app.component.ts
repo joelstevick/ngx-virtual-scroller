@@ -20,29 +20,19 @@ export class AppComponent implements OnInit {
   count = 0;
   timeout: any;
   initialized = false;
+  beaconEl: HTMLElement;
 
   ngOnInit(): void {
-    const beaconEl = document.querySelector("#beacon") as HTMLElement;
+    this.beaconEl = document.querySelector("#beacon") as HTMLElement;
 
-    // hide beacon while fetching
-    let fetching = false;
-    const hideBeacon = () => {
-      fetching = true;
-      beaconEl.style.visibility = "hidden";
-
-      setTimeout(() => {
-        beaconEl.style.visibility = "visible";
-        fetching = false;
-      }, 250);
-    };
     // listen for scroll to top events
     const scrollArea = document.querySelector("virtual-scroller");
 
     const observer = new IntersectionObserver(
       (event: IntersectionObserverEntry[]) => {
-        if (!fetching && event[0].isIntersecting) {
-          console.log("top");
-          hideBeacon();
+        if (this.beaconIsDisplayed && event[0].isIntersecting) {
+          console.log("top", this.items.length);
+          this.displayBeacon(false);
           this.fetchMore();
         }
       },
@@ -51,9 +41,15 @@ export class AppComponent implements OnInit {
       }
     );
 
-    observer.observe(beaconEl);
+    observer.observe(this.beaconEl);
   }
 
+  beaconIsDisplayed() {
+    return this.beaconEl.style.visibility === 'visible';
+  }
+  displayBeacon(show: boolean) {
+    this.beaconEl.style.visibility = show ? "visible" : "hidden";
+  }
   fetchMore() {
     const pageSize = this.items.length > 0 ? PageSize : 10;
 
@@ -68,6 +64,10 @@ export class AppComponent implements OnInit {
     }
   }
   vsStart(pageInfo: IPageInfo) {
+    console.log("vsStart", pageInfo);
+    if (pageInfo.startIndex >= 0) {
+      this.displayBeacon(true);
+    }
     if (!this.initialized && this.items.length > 0) {
       this.initialized = true;
       this.virtualScroller.scrollToIndex(this.items.length - 1);

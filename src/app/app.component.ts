@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
 
     const observer = new IntersectionObserver(
       (event: IntersectionObserverEntry[]) => {
-        if (this.beaconIsDisplayed && event[0].isIntersecting) {
+        if (this.isBeaconDisplayed && event[0].isIntersecting) {
           console.log("top", this.items.length);
           this.displayBeacon(false);
           this.fetchMore();
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
     observer.observe(this.beaconEl);
   }
 
-  beaconIsDisplayed() {
+  isBeaconDisplayed() {
     return this.beaconEl.style.visibility === 'visible';
   }
   displayBeacon(show: boolean) {

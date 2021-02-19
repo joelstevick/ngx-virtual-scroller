@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
   initialized = false;
 
   ngOnInit(): void {
+    // hide beacon
     // listen for scroll to top events
     const scrollArea = document.querySelector("virtual-scroller");
 
@@ -37,7 +38,7 @@ export class AppComponent implements OnInit {
       }
     );
 
-    observer.observe(document.querySelector("#fetchMore"));
+    observer.observe(document.querySelector("#beacon"));
   }
 
   fetchMore() {

@@ -30,11 +30,11 @@ export class AppComponent implements OnInit {
   }
 
   vsStart(pageInfo: IPageInfo) {
-    return;
     if (!this.initialized) {
       this.initialized = true;
       this.virtualScroller.scrollToIndex(MaxItems - 1);
     }
+    return;
     if (pageInfo.startIndex < 900) {
       this.items = this.items.slice(900);
     }

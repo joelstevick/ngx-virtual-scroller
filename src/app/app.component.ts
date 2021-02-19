@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
 
       setTimeout(() => {
         beaconEl.style.visibility = "visible";
-      }, 500);
+      }, 10);
     };
     // listen for scroll to top events
     const scrollArea = document.querySelector("virtual-scroller");
@@ -47,6 +47,7 @@ export class AppComponent implements OnInit {
         root: scrollArea
       }
     );
+
 
     observer.observe(beaconEl);
   }

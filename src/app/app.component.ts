@@ -26,10 +26,10 @@ export class AppComponent implements OnInit {
 
     // hide beacon while fetching
     const hideBeacon = () => {
-      beaconEl.style.display = "none";
+      beaconEl.style.visibility = "hidden";
 
       setTimeout(() => {
-        beaconEl.style.display = "block";
+        beaconEl.style.visibility = "visible";
       }, 500);
     };
     // listen for scroll to top events

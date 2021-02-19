@@ -25,19 +25,22 @@ export class AppComponent implements OnInit {
     const beaconEl = document.querySelector("#beacon") as HTMLElement;
 
     // hide beacon while fetching
+    let fetching = false;
     const hideBeacon = () => {
+      fetching = true;
       beaconEl.style.visibility = "hidden";
 
       setTimeout(() => {
         beaconEl.style.visibility = "visible";
-      }, 10);
+        fetching = false;
+      }, 250);
     };
     // listen for scroll to top events
     const scrollArea = document.querySelector("virtual-scroller");
 
     const observer = new IntersectionObserver(
       (event: IntersectionObserverEntry[]) => {
-        if (event[0].isIntersecting) {
+        if (!fetching && event[0].isIntersecting) {
           console.log("top");
           hideBeacon();
           this.fetchMore();
@@ -47,7 +50,6 @@ export class AppComponent implements OnInit {
         root: scrollArea
       }
     );
-
 
     observer.observe(beaconEl);
   }

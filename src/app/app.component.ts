@@ -18,10 +18,23 @@ export class AppComponent implements OnInit {
 
   items: any[] = [];
   count = 0;
-  needMore = true;
   timeout: any;
+  initialized = false;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // listen for scroll to top events
+    const scrollArea = document.querySelector("virtual-scroller");
+
+    const observer = new IntersectionObserver(
+      (event: IntersectionObserverEntry[]) => {
+        if (event[0].isIntersecting) {
+          this.fetchMore();
+        }
+      }
+    );
+
+    observer.observe(document.querySelector("#fetchMore"));
+  }
 
   fetchMore() {
     const pageSize = this.items.length > 0 ? PageSize : 10;
@@ -37,33 +50,10 @@ export class AppComponent implements OnInit {
     }
   }
   vsStart(pageInfo: IPageInfo) {
-    console.log("vsStart", pageInfo);
-    if (
-      this.needMore &&
-      pageInfo.startIndex <= 0 &&
-      this.items.length < MaxItems
-    ) {
-      this.needMore = false;
-
-      const scrollToEnd = this.items.length === 0;
-
-      console.log("FETCHING MORE..");
-      this.fetchMore();
-
-      if (scrollToEnd) {
-        this.needMore = true;
-
-        this.virtualScroller.scrollToIndex(this.items.length - 1);
-      } else {
-        // scroll to index 1, but need left the event loop run, first
-        if (this.timeout) {
-          clearTimeout(this.timeout);
-        }
-        this.timeout = setTimeout(() => {
-          console.log("scroll => 1");
-          this.needMore = true;
-        }, 100);
-      }
+    if (!this.initialized && this.items.length > 0) {
+      this.initialized = true;
+      console.log("vsStart", pageInfo);
+      this.virtualScroller.scrollToIndex(this.items.length - 1);
     }
   }
 

@@ -24,19 +24,17 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {}
 
   fetchMore() {
-    const newItems: any[] = [];
     const pageSize = this.items.length > 0 ? PageSize : 10;
 
+    const base = this.items.length;
+
     for (let i = 0; i < pageSize; i++) {
-      newItems.push({
+      this.items.unshift({
         html: this.sanitizer.bypassSecurityTrustHtml(
-          `<div style="height: ${this.getHeight()}px">${this.items.length +
-            i}</div>`
+          `<div style="height: ${this.getHeight()}px">${base + i}</div>`
         )
       });
     }
-    newItems.reverse();
-    this.items = [...newItems, ...this.items];
   }
   vsStart(pageInfo: IPageInfo) {
     console.log("vsStart", pageInfo);

@@ -22,7 +22,16 @@ export class AppComponent implements OnInit {
   initialized = false;
 
   ngOnInit(): void {
-    // hide beacon
+    const beaconEl = document.querySelector("#beacon") as HTMLElement;
+
+    // hide beacon while fetching
+    const hideBeacon = () => {
+      beaconEl.style.display = "none";
+
+      setTimeout(() => {
+        beaconEl.style.display = "block";
+      }, 500);
+    };
     // listen for scroll to top events
     const scrollArea = document.querySelector("virtual-scroller");
 
@@ -30,6 +39,7 @@ export class AppComponent implements OnInit {
       (event: IntersectionObserverEntry[]) => {
         if (event[0].isIntersecting) {
           console.log("top");
+          hideBeacon();
           this.fetchMore();
         }
       },
@@ -38,7 +48,7 @@ export class AppComponent implements OnInit {
       }
     );
 
-    observer.observe(document.querySelector("#beacon"));
+    observer.observe(beaconEl);
   }
 
   fetchMore() {

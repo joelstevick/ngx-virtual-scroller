@@ -28,8 +28,12 @@ export class AppComponent implements OnInit {
     const observer = new IntersectionObserver(
       (event: IntersectionObserverEntry[]) => {
         if (event[0].isIntersecting) {
+          console.log("top");
           this.fetchMore();
         }
+      },
+      {
+        root: scrollArea
       }
     );
 
@@ -52,7 +56,6 @@ export class AppComponent implements OnInit {
   vsStart(pageInfo: IPageInfo) {
     if (!this.initialized && this.items.length > 0) {
       this.initialized = true;
-      console.log("vsStart", pageInfo);
       this.virtualScroller.scrollToIndex(this.items.length - 1);
     }
   }

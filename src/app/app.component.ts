@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     for (let i = 0; i < MaxItems; i++) {
       this.items.push({
         html: this.sanitizer.bypassSecurityTrustHtml(
-          `<div style="height: ${this.getHeight()}px">${MaxItems - i}</div>`
+          `<div style="height: ${this.getHeight()}px">${i}</div>`
         )
       });
     }
@@ -33,14 +33,24 @@ export class AppComponent implements OnInit {
     if (!this.initialized) {
       this.initialized = true;
       this.virtualScroller.scrollToIndex(MaxItems - 1);
+    } else {
+      if (
+        pageInfo.startIndex > 0 &&
+        pageInfo.startIndex < 700 &&
+        this.items.length > 500
+      ) {
+        this.removeFromFront(700);
+        this.virtualScroller.scrollToIndex(0);
+      }
     }
-    return;
-    if (pageInfo.startIndex < 900) {
-      this.items = this.items.slice(900);
-    }
-    console.log("vsStart", pageInfo);
+    // console.log("vsStart", pageInfo, this.items.length);
   }
 
+  removeFromFront(count: number) {
+    while (count-- > 0) {
+      this.items.shift();
+    }
+  }
   getHeight() {
     return Math.round(Math.random() * 50) + 20;
   }

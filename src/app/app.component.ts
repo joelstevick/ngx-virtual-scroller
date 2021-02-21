@@ -22,9 +22,12 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     for (let i = 0; i < MaxItems; i++) {
       this.items.push({
-        html: this.sanitizer.bypassSecurityTrustHtml(
-          `<div style="height: ${this.getHeight()}px">${i}</div>`
-        )
+        html:
+          i < 800
+            ? this.sanitizer.bypassSecurityTrustHtml(`loading...${i}`)
+            : this.sanitizer.bypassSecurityTrustHtml(
+                `<div style="height: ${this.getHeight()}px">${i}</div>`
+              )
       });
     }
   }
@@ -33,22 +36,18 @@ export class AppComponent implements OnInit {
     if (!this.initialized) {
       this.initialized = true;
       this.virtualScroller.scrollToIndex(MaxItems - 1);
-    } else {
-      if (
-        pageInfo.startIndex > 0 &&
-        pageInfo.startIndex < 700 &&
-        this.items.length > 500
-      ) {
-        this.removeFromFront(700);
-        this.virtualScroller.scrollToIndex(0);
-      }
+
+      setTimeout(() => {
+        this.removeFromFront(800);
+      }, 500);
     }
-    // console.log("vsStart", pageInfo, this.items.length);
+    console.log("vsStart", pageInfo, this.items.length);
   }
 
   removeFromFront(count: number) {
-    while (count-- > 0) {
-      this.items.shift();
+    console.log("removing");
+    for (let i = 0; i < count; i++) {
+      this.items[i].html = "";
     }
   }
   getHeight() {
